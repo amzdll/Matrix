@@ -1,23 +1,9 @@
 #include "s21_matrix_oop.h"
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
 
-// TODO if/else  - is matrix add notnull if
+
 // TODO free throw ???
-
-int main() {
-  S21Matrix a(4, 4);
-  a.filling_matrix();
-  a.set_cols(5);
-  a.set_rows(5);
-  printf("%d, %d", a.get_cols(), a.get_rows());
-  S21Matrix b(std::move(a));
-
-  // printf("%s", a==b?"true":"false");
-  // a.display_matrix();
-  return 0;
-}
 
 //  CONSTRUCTORS
 S21Matrix::S21Matrix() {
@@ -153,7 +139,6 @@ S21Matrix S21Matrix::transpose() {
 }
 
 S21Matrix S21Matrix::calc_complements() {
-  // S21Matrix result(*this);
   S21Matrix result(this->rows_, this->cols_);
   if (this->rows_ == this->cols_) {
     if (this->matrix_is_existing()) {

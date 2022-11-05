@@ -30,7 +30,7 @@ class S21Matrix {
   bool eq_matrix(const S21Matrix& other);
   void sum_matrix(const S21Matrix& other);
   void sub_matrix(const S21Matrix& other);
-  void mul_number(const double num);
+  void mul_number(double num);
   void mul_matrix(const S21Matrix& other);
   S21Matrix transpose();
   S21Matrix calc_complements();
@@ -40,15 +40,15 @@ class S21Matrix {
   //  overloading
   S21Matrix operator+(const S21Matrix& other);
   S21Matrix operator-(const S21Matrix& other);
-  S21Matrix operator*(const double num);
+  S21Matrix operator*(double num);
   S21Matrix operator*(const S21Matrix& other);
   bool operator==(const S21Matrix& other);
   S21Matrix& operator=(const S21Matrix& other);
   S21Matrix operator+=(const S21Matrix& other);
   S21Matrix operator-=(const S21Matrix& other);
-  S21Matrix operator*=(const double num);
+  S21Matrix operator*=(double num);
   S21Matrix operator*=(const S21Matrix& other);
-  double& operator()(const int i, const int j);
+  double& operator()(int i, int j);
 
   // additional
   void filling_matrix();
