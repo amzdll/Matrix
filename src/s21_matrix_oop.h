@@ -16,7 +16,7 @@ public:
   int get_rows() const;
   int get_cols() const;
   void set_rows(int rows);
-  void set_cols(int cols) { this->cols_ = cols; }
+  void set_cols(int cols);
 
   bool EqMatrix(const S21Matrix &other);
   void SumMatrix(const S21Matrix &other);
@@ -40,12 +40,9 @@ public:
   S21Matrix operator*=(const S21Matrix &other);
   double &operator()(int i, int j);
 
-  // additional to test
   void FillingMatrix();
   void ZeroingMatrix();
-
-  void display_matrix();
-
+  //refactor
 private:
   int rows_, cols_;
   double **matrix_;

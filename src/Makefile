@@ -3,32 +3,36 @@ CPPFLAGS = -Wall -Werror -Wextra
 PROJECTNAME = s21_matrix_oop
 SOURCE = $(wildcard s21_*.cpp)
 
-all: clean s21_matrix_oop.a test
+all: clean $(PROJECTNAME).a test
 
 clean:
 	@rm -rf *.out
-	@rm -rf $(PROJECTNAME).a
-	@rm -rf $(PROJECTNAME).o
+	@rm -rf *.gcda
+	@rm -rf *.gcno
+	@rm -rf *.a
+	@rm -rf *.info
+	@rm -rf *.o
 	@rm -rf s21_matrix_oop.dSYM
 	@rm -rf test
+	@rm -rf report
 
-s21_matrix_oop.a: $(SOURCE)
+$(PROJECTNAME).a: $(SOURCE)
 	@$(CPP) $(CPPFLAGS) $(SOURCE) -c
 	@ar rcs $(PROJECTNAME).a *.o
 	@ranlib $(PROJECTNAME).a
 
 test:
 	@clear
-	@$(CPP) $(CPPFLAGS) test.cpp $(PROJECTNAME).a -o test  -lgtest 
-	@leaks -q -atExit -- ./test
+	@$(CPP) $(CPPFLAGS) $(PROJECTNAME)_test.cpp $(PROJECTNAME).a -o test -lgtest
+	./test
+
+gcov_report:
+	@$(CPP) $(CPPFLAGS) -fprofile-arcs -ftest-coverage $(PROJECTNAME)_test.cpp $(PROJECTNAME).cpp -o test -lgtest
+	@./test
+	@lcov -t "test" -o test.info -c -d .
+	@genhtml -o report test.info
+	@open ./report/index.html
 
 check:
-	@clang-format -n -i *.cpp
-	@clang-format -n -i *.h
-
-push:
-	git add *.cpp
-	git add *.h
-	git add .clang-format
-	git commit -m "update"
-	git push origin develop
+	clang-format -n *.cpp
+	clang-format -n *.h
